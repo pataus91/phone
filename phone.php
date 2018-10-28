@@ -2,9 +2,9 @@
 
 class Phone
 {
-	public function sendMessageArchive($sender, $receiver, $message)
+	public function sendMessage($sender, $receiver, $message)
 	{
-		$listMessage = [
+		$this->listMessage = $listMessage = [
 			"sender" => $sender,
 			"receiver" => $receiver,
 			"message" => $message
@@ -12,19 +12,26 @@ class Phone
 		return $listMessage;
 	}
 
-	public function readMessage($sender, $message)
+	public function readMessage()
 	{
-		echo "From: " . $sender . "\n'" . $message . "'\n";
+		echo "From: " . $this->listMessage["sender"] . "\n" . $this->listMessage["message"] . "\n";
 	}
 
-	public function displayMessageAndReceiverNumber($receiver, $message)
+	public function displayMessageAndReceiverNumber()
 	{
-		echo "To: " . $receiver . "\n'" . $message . "'\n";
+		echo "To: " . $this->listMessage["receiver"] . "\n" . $this->listMessage["message"] . "\n";
 	}
 
 }
 
 $phone = new Phone();
-$phone->readMessage("Quentino","Salut Silvia");
-$phone->displayMessageAndReceiverNumber("Silvia", "Salut Silvia");
-var_dump($phone->sendMessageArchive("Quentino", "Silvia","Salut Silvia"));
+$phone->sendMessage("Quentino", "Silvia","Salut Silvia");
+$phone->readMessage();
+$phone->displayMessageAndReceiverNumber();
+
+
+$phone2 = new Phone();
+$phone2->sendMessage("Raph", "Romain","Salut Romain");
+$phone2->readMessage();
+$phone2->displayMessageAndReceiverNumber();
+
