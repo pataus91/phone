@@ -2,14 +2,15 @@
 
 class Phone
 {
+
 	public function sendMessage()
 	{
 
 	}
 
-	public function receiveMessage()
+	public function readMessage($sender, $message)
 	{
-
+		echo "From: " . $sender . "\n'" . $message . "'\n";
 	}
 
 	public function displayMessageAndReceiverNumber()
@@ -19,4 +20,7 @@ class Phone
 
 }
 
+
+
 $phone = new Phone();
+$phone->readMessage("Quentino","Salut Silvia");
