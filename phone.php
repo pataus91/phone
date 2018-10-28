@@ -2,10 +2,14 @@
 
 class Phone
 {
-
-	public function sendMessage()
+	public function sendMessageArchive($sender, $receiver, $message)
 	{
-
+		$listMessage = [
+			"sender" => $sender,
+			"receiver" => $receiver,
+			"message" => $message
+		];	
+		return $listMessage;
 	}
 
 	public function readMessage($sender, $message)
@@ -23,3 +27,4 @@ class Phone
 $phone = new Phone();
 $phone->readMessage("Quentino","Salut Silvia");
 $phone->displayMessageAndReceiverNumber("Silvia", "Salut Silvia");
+var_dump($phone->sendMessageArchive("Quentino", "Silvia","Salut Silvia"));
