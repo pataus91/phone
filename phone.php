@@ -17,7 +17,7 @@ class Phone
 		echo "From: " . $this->listMessage["sender"] . "\n" . $this->listMessage["message"] . "\n";
 	}
 
-	public function displayMessageAndReceiverNumber()
+	public function displayMessageAndReceiver()
 	{
 		echo "To: " . $this->listMessage["receiver"] . "\n" . $this->listMessage["message"] . "\n";
 	}
@@ -27,11 +27,11 @@ class Phone
 $phone = new Phone();
 $phone->sendMessage("Quentino", "Silvia","Salut Silvia");
 $phone->readMessage();
-$phone->displayMessageAndReceiverNumber();
+$phone->displayMessageAndReceiver();
 
 
 $phone2 = new Phone();
 $phone2->sendMessage("Raph", "Romain","Salut Romain");
 $phone2->readMessage();
-$phone2->displayMessageAndReceiverNumber();
+$phone2->displayMessageAndReceiver();
 
