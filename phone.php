@@ -6,50 +6,73 @@ class Phone
 	private $sentMessages = [];
 	private $receivedMessages = [];
 
-	public function sendMessage($to, $message) 
+	public function sendMessage($to, $message)
 	{
-		$this->sentMessages = [
-			"to" => $to,
-			"message" => $message
-		];
+		// To implement
 	}
 
-	public function receiveMessage($from, $message) 
+	public function receiveMessage($from, $message)
 	{
-		$this->receivedMessages = [
-			"from" => $from,
-			"message" => $message
-		];
+        // To implement
 	}
 
-	public function seeAllSendedMessage() 
+	public function seeAllSendedMessage()
 	{
-		return $this->sentMessages;
+		// To implement
 	}
-
 
 	public function seeAllReceivedMessage()
 	{
-		return $this->receivedMessages;
+		// To implement
 	}
 }
 
-$messages = array(
-	array ("Quentino", "Silvia", "Salut Silvia"),
-	array ("Silvia", "Quentino", "Salut Quentino"),
-	array ("Raph", "Silvia", "J'arrive")
-);	
-
 $phone = new Phone();
+$phone->sendMessage('Quentino', 'Ciao Quentino');
+$phone->receiveMessage('Quentino', 'Hello Silvia');
+$phone->sendMessage('Quentino', 'J\'ai une nouvelle version de phone sur github. Peux tu regarder ?');
+$phone->receiveMessage('Quentino', 'Ok je regarde ça tout de suite !');
 
-foreach ($messages as $message) {
-	$phone->sendMessage($message[1], $message[2]);
-	$phone->receiveMessage($message[0], $message[2]);
-	$sentMessages [] = [$phone->seeAllSendedMessage()];
-	$receivedMessages [] = [$phone->seeAllReceivedMessage()];
+var_dump($phone->seeAllSendedMessage());
+var_dump($phone->seeAllReceivedMessage());
+
+/**
+
+// seeAllSendedMessage
+array(2) {
+  [0]=>
+  array(2) {
+    ["to"]=>
+    string(8) "Quentino"
+    ["message"]=>
+    string(13) "Ciao Quentino"
+  }
+  [1]=>
+  array(2) {
+    ["to"]=>
+    string(8) "Quentino"
+    ["message"]=>
+    string(65) "J'ai une nouvelle version de phone sur github. Peux tu regarder ?"
+  }
 }
 
-var_dump($sentMessages);
-var_dump($receivedMessages);
+//seeAllReceivedMessage
+array(2) {
+  [0]=>
+  array(2) {
+    ["from"]=>
+    string(8) "Quentino"
+    ["message"]=>
+    string(12) "Hello Silvia"
+  }
+  [1]=>
+  array(2) {
+    ["from"]=>
+    string(8) "Quentino"
+    ["message"]=>
+    string(33) "Ok je regarde ça tout de suite !"
+  }
+}
+ */
 
 
