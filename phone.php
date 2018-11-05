@@ -8,22 +8,30 @@ class Phone
 
 	public function sendMessage($to, $message)
 	{
-		// To implement
+		$this->sentMessages [] = 
+		[
+			"to" => $to,
+			"message" => $message
+		];
 	}
 
 	public function receiveMessage($from, $message)
 	{
-        // To implement
+        $this->receivedMessages [] = 
+		[
+			"from" => $from,
+			"message" => $message
+		];
 	}
 
 	public function seeAllSendedMessage()
 	{
-		// To implement
+		return $this->sentMessages;
 	}
 
 	public function seeAllReceivedMessage()
 	{
-		// To implement
+		return $this->receivedMessages;
 	}
 }
 
@@ -36,43 +44,5 @@ $phone->receiveMessage('Quentino', 'Ok je regarde ça tout de suite !');
 var_dump($phone->seeAllSendedMessage());
 var_dump($phone->seeAllReceivedMessage());
 
-/**
-
-// seeAllSendedMessage
-array(2) {
-  [0]=>
-  array(2) {
-    ["to"]=>
-    string(8) "Quentino"
-    ["message"]=>
-    string(13) "Ciao Quentino"
-  }
-  [1]=>
-  array(2) {
-    ["to"]=>
-    string(8) "Quentino"
-    ["message"]=>
-    string(65) "J'ai une nouvelle version de phone sur github. Peux tu regarder ?"
-  }
-}
-
-//seeAllReceivedMessage
-array(2) {
-  [0]=>
-  array(2) {
-    ["from"]=>
-    string(8) "Quentino"
-    ["message"]=>
-    string(12) "Hello Silvia"
-  }
-  [1]=>
-  array(2) {
-    ["from"]=>
-    string(8) "Quentino"
-    ["message"]=>
-    string(33) "Ok je regarde ça tout de suite !"
-  }
-}
- */
 
 
