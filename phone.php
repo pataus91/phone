@@ -6,10 +6,35 @@ class Phone
 	private $sentMessages = [];
 	private $receivedMessages = [];
 
-	public function sendMessage($to, $message)
+	public function generateDateTime()
 	{
+		$now = getdate();	
+		$date = [
+			$now["mday"],
+			$now["mon"],
+			$now["year"],
+		];
+		$date = implode("-", $date);	
+
+		$time = [
+			$now["hours"],
+			$now["minutes"],
+			$now["seconds"],
+		];
+		$time = implode(":", $time);
+
+		return [$date, $time];
+	}
+
+
+	public function sendMessage($to, $message)
+	{	
+		$dateTime = $this->generateDateTime();
+		
 		$this->sentMessages [] = 
 		[
+			"date" => $dateTime[0],
+			"time" => $dateTime[1],
 			"to" => $to,
 			"message" => $message
 		];
@@ -17,9 +42,13 @@ class Phone
 
 	public function receiveMessage($from, $message)
 	{
-        $this->receivedMessages [] = 
+		$dateTime = $this->generateDateTime();
+		
+		$this->sentMessages [] = 
 		[
-			"from" => $from,
+			"date" => $dateTime[0],
+			"time" => $dateTime[1],
+			"to" => $from,
 			"message" => $message
 		];
 	}
@@ -34,6 +63,7 @@ class Phone
 		return $this->receivedMessages;
 	}
 }
+
 
 $phone = new Phone();
 $phone->sendMessage('Quentino', 'Ciao Quentino');
