@@ -44,7 +44,7 @@ class Phone
 	{
 		$dateTime = $this->generateDateTime();
 		
-		$this->sentMessages [] = 
+		$this->receivedMessages [] = 
 		[
 			"date" => $dateTime[0],
 			"time" => $dateTime[1],
