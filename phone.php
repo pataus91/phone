@@ -6,35 +6,10 @@ class Phone
 	private $sentMessages = [];
 	private $receivedMessages = [];
 
-	public function generateDateTime()
-	{
-		$now = getdate();	
-		$date = [
-			$now["mday"],
-			$now["mon"],
-			$now["year"],
-		];
-		$date = implode("-", $date);	
-
-		$time = [
-			$now["hours"],
-			$now["minutes"],
-			$now["seconds"],
-		];
-		$time = implode(":", $time);
-
-		return [$date, $time];
-	}
-
-
 	public function sendMessage($to, $message)
-	{	
-		$dateTime = $this->generateDateTime();
-		
-		$this->sentMessages [] = 
-		[
-			"date" => $dateTime[0],
-			"time" => $dateTime[1],
+	{
+		$this->sentMessages[] = [
+			"sendAt" => new DateTime(),
 			"to" => $to,
 			"message" => $message
 		];
@@ -42,12 +17,8 @@ class Phone
 
 	public function receiveMessage($from, $message)
 	{
-		$dateTime = $this->generateDateTime();
-		
-		$this->receivedMessages [] = 
-		[
-			"date" => $dateTime[0],
-			"time" => $dateTime[1],
+		$this->receivedMessages[] = [
+			"receivedAt" => new DateTime(),
 			"to" => $from,
 			"message" => $message
 		];
