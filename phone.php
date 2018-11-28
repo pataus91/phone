@@ -1,15 +1,16 @@
 <?php
 
+
 class Phone
 {
-
 	private $sentMessages = [];
 	private $receivedMessages = [];
+	private $allMessages = [];
 
 	public function sendMessage($to, $message)
 	{
 		$this->sentMessages[] = [
-			"sendAt" => new DateTime(),
+			"sentAt" => new DateTime(),
 			"to" => $to,
 			"message" => $message
 		];
@@ -24,14 +25,49 @@ class Phone
 		];
 	}
 
-	public function seeAllSendedMessage()
+	private function orderMessagesByDate($messages)
 	{
-		return $this->sentMessages;
+		$nMessages = count($messages);
+
+		for ($j = 0; $j <= $nMessages -1; $j++) {
+			$oldestMessage = $messages[0];
+			$keyOldestMessage = 0;
+			foreach ($messages as $key => $message) {
+				
+
+				// Je recupere la date du message actuel
+				if(array_key_exists('sentAt', $message)) {
+					$date = $message['sentAt'];
+				} else {
+					$date = $message['receivedAt'];
+				}
+
+				// Je veux la date du message le plus vieux en ce moment 
+				if(array_key_exists('sentAt', $oldestMessage)) {
+					$dateOldestMessage = $oldestMessage['sentAt'];
+				} else {
+					$dateOldestMessage = $oldestMessage['receivedAt'];
+				}
+
+				if ($date < $dateOldestMessage) {
+					$oldestMessage = $message;
+					$keyOldestMessage = $key;
+				}
+			}
+			$result[] = $oldestMessage;
+			unset($messages[$keyOldestMessage]);
+			$messages = array_values($messages);	
+		}
+
+		return $result;
 	}
 
-	public function seeAllReceivedMessage()
+
+	public function displayConversation()
 	{
-		return $this->receivedMessages;
+		$allMessages = array_merge($this->sentMessages, $this->receivedMessages);
+		$conversation = $this->orderMessagesByDate($allMessages);
+		var_dump($conversation);
 	}
 }
 
@@ -41,9 +77,6 @@ $phone->sendMessage('Quentino', 'Ciao Quentino');
 $phone->receiveMessage('Quentino', 'Hello Silvia');
 $phone->sendMessage('Quentino', 'J\'ai une nouvelle version de phone sur github. Peux tu regarder ?');
 $phone->receiveMessage('Quentino', 'Ok je regarde ça tout de suite !');
-
-var_dump($phone->seeAllSendedMessage());
-var_dump($phone->seeAllReceivedMessage());
-
+$phone->displayConversation();
 
 
