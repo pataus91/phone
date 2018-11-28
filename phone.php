@@ -27,11 +27,11 @@ class Phone
 
 	private function getDate ($message) 
 	{
-		if(array_key_exists('sentAt', $message)) {
+		if (array_key_exists('sentAt', $message)) {
 			$date = $message['sentAt'];
-			} else {
+		} else {
 				$date = $message['receivedAt'];
-			}
+		}
 
 			return $date;
 	}
@@ -45,10 +45,7 @@ class Phone
 			$keyOldestMessage = 0;
 			foreach ($messages as $key => $message) {
 				
-				// Je recupere la date du message actuel
 				$date = $this->getDate($message);
-
-				// Je veux la date du message le plus vieux en ce moment 
 				$dateOldestMessage = $this->getDate($oldestMessage);
 
 				if ($date < $dateOldestMessage) {
@@ -64,12 +61,23 @@ class Phone
 		return $result;
 	}
 
+	private function convertConversationFromArrayToString($conversation)
+	{
+		foreach ($conversation as $key => $message) {
+				
+			$text = $message['message'];
+			$date = $this->getDate($message);
+
+			echo "\n" . $text . "\n" . "(DATE: " . $date->format('Y-m-d H:i:s') . ")" . "\n" . "\n";
+		}	
+	}
+
 
 	public function displayConversation()
 	{
 		$allMessages = array_merge($this->sentMessages, $this->receivedMessages);
 		$conversation = $this->orderMessagesByDate($allMessages);
-		var_dump($conversation);
+		$conversation = $this->convertConversationFromArrayToString($conversation);
 	}
 }
 
