@@ -25,15 +25,15 @@ class Phone
 		];
 	}
 
-	private function getDate ($message) 
+	private function getDate($message) 
 	{
 		if (array_key_exists('sentAt', $message)) {
 			$date = $message['sentAt'];
 		} else {
-				$date = $message['receivedAt'];
+			$date = $message['receivedAt'];
 		}
 
-			return $date;
+		return $date;
 	}
 
 	private function orderMessagesByDate($messages)
@@ -61,8 +61,9 @@ class Phone
 		return $result;
 	}
 
-	private function convertConversationFromArrayToString($conversation)
+	public function displayConversation()
 	{
+		$conversation = $this->createConversation();
 		foreach ($conversation as $key => $message) {
 				
 			$text = $message['message'];
@@ -73,11 +74,11 @@ class Phone
 	}
 
 
-	public function displayConversation()
+	private function createConversation()
 	{
 		$allMessages = array_merge($this->sentMessages, $this->receivedMessages);
 		$conversation = $this->orderMessagesByDate($allMessages);
-		$conversation = $this->convertConversationFromArrayToString($conversation);
+		return $conversation;
 	}
 }
 
